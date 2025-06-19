@@ -27,17 +27,42 @@ public:
     void set_null() const;
     void operator+=(const OurArray &our_array); // OurArray&?
 
-    // push_front (сдвинуть все элементы) +
-    // pop_front (возвращает значение) +
-    // pop_back (возвращает значение) +
-    // reverse +
-    // сделать метод вывода +
-    // сделать сортировку
-    // доп конструктор с дефолтными элементами (size, каждый элемент по дефолту 1) -+
-    // оператор суммы (складывать массивы) +
-    // метод на получения capacity +
-    // зануление (все элементы в рамках capacity (aka в хранилище) занулить +
+    class Iterator
+    {
+    public:
+        Iterator(){index = 0; our_array = NULL;}
+        Iterator(std::size_t n){index = n; our_array = NULL;}
 
+        Iterator &operator=(Iterator iter){
+            index = iter.index; 
+            our_array = iter.our_array;
+            return *this;
+        }
+
+        double operator*(){return (*our_array)[index];}
+        Iterator operator++(){index++; return *this;}
+        bool operator==(Iterator iter){return index == iter.index;}
+        bool operator!=(Iterator iter){return index != iter.index;}
+
+        friend class OurArray;
+
+    private:
+        OurArray *our_array;
+        std::size_t index;
+    };
+
+    Iterator begin(){
+        Iterator iter;
+        iter.our_array = this;
+        return iter;
+    }
+
+    Iterator end()
+    {
+        Iterator iter(size);
+        iter.our_array = this;
+        return iter;
+    }
 
 private:
     double *arr;
