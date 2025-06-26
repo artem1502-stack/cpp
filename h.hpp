@@ -5,6 +5,6 @@
 # include <cstdlib>
 # include <math.h>
 # include <string>
-#include "../ComplexNumber.hpp"
+# include "ComplexNumber.hpp"
 
 # endif

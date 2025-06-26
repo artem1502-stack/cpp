@@ -1,5 +1,5 @@
-#include "../h.hpp"
-#include "../ComplexNumber.hpp"
+#include "h.hpp"
+#include "ComplexNumber.hpp"
 
 int main()
 {

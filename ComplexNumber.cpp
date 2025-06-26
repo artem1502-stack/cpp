@@ -1,4 +1,4 @@
-#include "../h.hpp"
+#include "h.hpp"
 
 
 ComplexNumber::ComplexNumber()
@@ -73,7 +73,7 @@ void ComplexNumber::show() const
 
 void ComplexNumber::absolute() const
 {
-    std::cout << std::sqrt(real*real+imaginary*imaginary) << std::endl;
+    std::cout << sqrt(real*real+imaginary*imaginary) << std::endl;
 }
 
 void ComplexNumber::conjugate()
