@@ -1,0 +1,3 @@
+/Users/artemandreev/Desktop/work/tur_ocean/cpp/06_27/our_array/CMakeFiles/our_lists.dir
+/Users/artemandreev/Desktop/work/tur_ocean/cpp/06_27/our_array/CMakeFiles/edit_cache.dir
+/Users/artemandreev/Desktop/work/tur_ocean/cpp/06_27/our_array/CMakeFiles/rebuild_cache.dir
