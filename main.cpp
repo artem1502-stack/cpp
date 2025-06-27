@@ -1,16 +1,15 @@
-#include "../h.hpp"
-#include "../ComplexNumber.hpp"
+#include "h.hpp"
+#include "ComplexNumber.hpp"
 
 int main()
 {
-    ComplexNumber num(4, 3);
-    num.show();
-
-    ComplexNumber num2(5, -1);
+    ComplexNumber num2(8, 9);
+    ComplexNumber num3(3, 2);
+    num3.show();
     num2.show();
 
-    num*=num2;
-    num.show();
+    auto n3 = num2.conjugate();
+    n3.show();
 
     return 0;
 }

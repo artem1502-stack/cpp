@@ -6,18 +6,28 @@ class ComplexNumber
 {
 public:
     ComplexNumber();
-    ComplexNumber(double imaginary_part);
+    explicit ComplexNumber(double real_part);
     ComplexNumber(double real_part, double imaginary_part);
-    // ~ComplexNumber();
+	ComplexNumber(const ComplexNumber &complex_number);
 
-    void show() const;
-    void absolute() const;
-    void conjugate();
-    void operator+=(const ComplexNumber &complex_number);
-    void operator-=(const ComplexNumber &complex_number);
-    void operator*=(const ComplexNumber &complex_number);
+    // > < >= <= abs
+	ComplexNumber& operator=(const ComplexNumber &complex_number);
+
+    ComplexNumber& operator+=(const ComplexNumber &complex_number);
+    ComplexNumber operator+(const ComplexNumber &complex_number) const; //this
+
+    ComplexNumber& operator-=(const ComplexNumber &complex_number);
+    ComplexNumber operator-(const ComplexNumber &complex_number) const;
+
+    ComplexNumber& operator*=(const ComplexNumber &complex_number);
+    ComplexNumber operator*(const ComplexNumber &complex_number) const;
+
+    bool operator==(const ComplexNumber&) const;
     bool is_equal_to(const ComplexNumber &complex_number) const;
     bool abs_equal_to(const ComplexNumber &complex_number) const;
+    void absolute() const;
+    void show() const;
+    ComplexNumber conjugate() const;
 
 
 private:

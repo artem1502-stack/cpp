@@ -1,11 +1,17 @@
-#include "../h.hpp"
+#include "h.hpp"
 
 
 ComplexNumber::ComplexNumber()
 {
     real = 0;
-    imaginary = 1;
+    imaginary = 0;
 
+}
+
+ComplexNumber::ComplexNumber(double real_part)
+{
+    real = real_part;
+    imaginary = 0;
 }
 
 ComplexNumber::ComplexNumber(double real_part, double imaginary_part)
@@ -15,16 +21,81 @@ ComplexNumber::ComplexNumber(double real_part, double imaginary_part)
 
 }
 
-ComplexNumber::ComplexNumber(double imaginary_part)
+ComplexNumber::ComplexNumber(const ComplexNumber &complex_number)
 {
-    real = 0;
-    imaginary = imaginary_part;
+    real = complex_number.real;
+    imaginary = complex_number.imaginary;
 }
 
-// ComplexNumber::~ComplexNumber()
-// {
-//
-// }
+ComplexNumber& ComplexNumber::operator=(const ComplexNumber& complex_number)
+= default;
+
+ComplexNumber& ComplexNumber::operator+=(const ComplexNumber& complex_number)
+{
+    real+=complex_number.real;
+    imaginary+=complex_number.imaginary;
+    return *this;
+}
+
+ComplexNumber ComplexNumber::operator+(const ComplexNumber& complex_number) const
+{
+    return {real+complex_number.real, imaginary+complex_number.imaginary};
+}
+
+ComplexNumber& ComplexNumber::operator-=(const ComplexNumber &complex_number)
+{
+    real-=complex_number.real;
+    imaginary-=complex_number.imaginary;
+    return *this;
+}
+
+ComplexNumber ComplexNumber::operator-(const ComplexNumber& complex_number) const
+{
+    return {real-complex_number.real, imaginary-complex_number.imaginary};
+}
+
+ComplexNumber& ComplexNumber::operator*=(const ComplexNumber &complex_number)
+{
+    const auto orig_real = real;
+    real = real*complex_number.real + imaginary*complex_number.imaginary*(-1);
+    imaginary = orig_real*complex_number.imaginary + imaginary*complex_number.real;
+    return *this;
+}
+
+ComplexNumber ComplexNumber::operator*(const ComplexNumber& complex_number) const
+{
+    const auto orig_real = real;
+    return {real*complex_number.real + imaginary*complex_number.imaginary*(-1),
+        orig_real*complex_number.imaginary + imaginary*complex_number.real};
+}
+
+bool ComplexNumber::operator==(const ComplexNumber& complex_number) const
+{
+    if (real == complex_number.real and imaginary == complex_number.imaginary)
+        return true;
+    return false;
+
+}
+
+bool ComplexNumber::is_equal_to(const ComplexNumber &complex_number) const
+{
+    if (real == complex_number.real and imaginary == complex_number.imaginary)
+        return true;
+    return false;
+}
+
+bool ComplexNumber::abs_equal_to(const ComplexNumber &complex_number) const
+{
+    if ((real == complex_number.real or real == -complex_number.real)
+        and (imaginary == complex_number.imaginary or imaginary == -complex_number.imaginary))
+        return true;
+    return false;
+}
+
+void ComplexNumber::absolute() const
+{
+    std::cout << std::sqrt(real*real+imaginary*imaginary) << std::endl;
+}
 
 void ComplexNumber::show() const
 {
@@ -70,55 +141,7 @@ void ComplexNumber::show() const
     std::cout << real << " " << operation << " " << show_imaginary << 'i' << std::endl;
 }
 
-
-void ComplexNumber::absolute() const
+ComplexNumber ComplexNumber::conjugate() const // returns a new complex number
 {
-    std::cout << std::sqrt(real*real+imaginary*imaginary) << std::endl;
+    return {real, imaginary*-1};
 }
-
-void ComplexNumber::conjugate()
-{
-    imaginary*=-1;
-    show();
-    imaginary*=-1;
-}
-
-void ComplexNumber::operator+=(const ComplexNumber& complex_number)
-{
-    real+=complex_number.real;
-    imaginary+=complex_number.imaginary;
-}
-
-void ComplexNumber::operator-=(const ComplexNumber &complex_number)
-{
-    real-=complex_number.real;
-    imaginary-=complex_number.imaginary;
-}
-
-
-void ComplexNumber::operator*=(const ComplexNumber &complex_number)
-{
-    const auto orig_real = real;
-    real = real*complex_number.real + imaginary*complex_number.imaginary*(-1);
-    imaginary = orig_real*complex_number.imaginary + imaginary*complex_number.real;
-}
-
-
-
-bool ComplexNumber::is_equal_to(const ComplexNumber &complex_number) const
-{
-    if (real == complex_number.real and imaginary == complex_number.imaginary)
-        return true;
-    return false;
-}
-
-
-bool ComplexNumber::abs_equal_to(const ComplexNumber &complex_number) const
-{
-    if ((real == complex_number.real or real == -complex_number.real)
-        and (imaginary == complex_number.imaginary or imaginary == -complex_number.imaginary))
-        return true;
-    return false;
-}
-
-
